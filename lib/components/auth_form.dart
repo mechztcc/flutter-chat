@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:chat/components/user_image_picker.dart';
 import 'package:chat/models/auth_form_data.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +16,26 @@ class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   final _formData = AuthFormData();
 
+  void showError(String msg) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(msg),
+      backgroundColor: Theme.of(context).errorColor,
+    ));
+  }
+
   void _submit() {
     final isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) return;
 
+    if (_formData.image == null && _formData.isSignup) {
+      return showError('Imagem não selecionada');
+    }
+
     widget.onSubmit(_formData);
+  }
+
+  void _handlePick(File file) {
+    _formData.image = file;
   }
 
   @override
@@ -31,18 +49,19 @@ class _AuthFormState extends State<AuthForm> {
           child: Column(
             children: [
               if (_formData.isSignup)
-                TextFormField(
-                  key: const ValueKey('name'),
-                  initialValue: _formData.name,
-                  onChanged: (name) => _formData.name = name,
-                  validator: (_name) {
-                    final name = _name ?? '';
-                    if (name.trim().length < 5) {
-                      return 'Nome muito curto';
-                    }
-                  },
-                  decoration: const InputDecoration(labelText: 'Nome'),
-                ),
+                UserImagePicker(onImagePicker: _handlePick),
+              TextFormField(
+                key: const ValueKey('name'),
+                initialValue: _formData.name,
+                onChanged: (name) => _formData.name = name,
+                validator: (_name) {
+                  final name = _name ?? '';
+                  if (name.trim().length < 5) {
+                    return 'Nome muito curto';
+                  }
+                },
+                decoration: const InputDecoration(labelText: 'Nome'),
+              ),
               TextFormField(
                 key: const ValueKey('email'),
                 initialValue: _formData.email,
