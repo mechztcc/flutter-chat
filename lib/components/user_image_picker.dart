@@ -12,13 +12,41 @@ class UserImagePicker extends StatefulWidget {
 }
 
 class _UserImagePickerState extends State<UserImagePicker> {
+
+  File? _image;
+
+  void _pickImage() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         CircleAvatar(
+          radius: 40,
           backgroundColor: Colors.grey,
+          backgroundImage: _image != null ? FileImage(_image!) : null,
         ),
+        const SizedBox(
+          height: 20,
+        ),
+        TextButton(
+          onPressed: _pickImage,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.image,
+                color: Theme.of(context).primaryColor,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              const Text('Adicionar Imagem')
+            ],
+          ),
+        )
       ],
     );
   }
