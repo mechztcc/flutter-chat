@@ -2,7 +2,8 @@ import 'package:chat/models/auth_form_data.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({Key? key}) : super(key: key);
+  final void Function(AuthFormData) onSubmit;
+  const AuthForm({Key? key, required this.onSubmit}) : super(key: key);
 
   @override
   State<AuthForm> createState() => _AuthFormState();
