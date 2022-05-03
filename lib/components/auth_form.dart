@@ -28,12 +28,15 @@ class _AuthFormState extends State<AuthForm> {
             children: [
               if(_formData.isSignup)
                 TextFormField(
+                  key: const ValueKey('name'),
                   decoration: const InputDecoration(labelText: 'Nome'),
                 ),
               TextFormField(
+                key: const ValueKey('email'),
                 decoration: const InputDecoration(labelText: 'E-mail'),
               ),
               TextFormField(
+                key: const ValueKey('password'),
                 decoration: const InputDecoration(
                   labelText: 'Senha',
                 ),
