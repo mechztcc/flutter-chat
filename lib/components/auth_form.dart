@@ -26,9 +26,10 @@ class _AuthFormState extends State<AuthForm> {
           autovalidateMode: AutovalidateMode.always,
           child: Column(
             children: [
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Nome'),
-              ),
+              if(_formData.isSignup)
+                TextFormField(
+                  decoration: const InputDecoration(labelText: 'Nome'),
+                ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'E-mail'),
               ),
@@ -46,12 +47,18 @@ class _AuthFormState extends State<AuthForm> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: _submit,
-                  child: const Text('Entrar'),
+                  child: Text(_formData.isLogin ? 'Entrar' : 'Cadastrar'),
                 ),
               ),
               TextButton(
-                onPressed: () {},
-                child: const Text('Criar nova conta'),
+                onPressed: () {
+                  setState(() {
+                    _formData.toggleAuthMode();
+                  });
+                },
+                child: Text(_formData.isLogin
+                    ? 'Criar nova conta'
+                    : 'Já possui conta?'),
               )
             ],
           ),
