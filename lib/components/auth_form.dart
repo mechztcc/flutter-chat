@@ -16,6 +16,8 @@ class _AuthFormState extends State<AuthForm> {
   void _submit() {
     final isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) return;
+
+    widget.onSubmit(_formData);
   }
 
   @override
