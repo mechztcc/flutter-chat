@@ -26,22 +26,40 @@ class _AuthFormState extends State<AuthForm> {
           autovalidateMode: AutovalidateMode.always,
           child: Column(
             children: [
-              if(_formData.isSignup)
+              if (_formData.isSignup)
                 TextFormField(
                   key: const ValueKey('name'),
                   initialValue: _formData.name,
                   onChanged: (name) => _formData.name = name,
+                  validator: (_name) {
+                    final name = _name ?? '';
+                    if (name.trim().length < 5) {
+                      return 'Nome muito curto';
+                    }
+                  },
                   decoration: const InputDecoration(labelText: 'Nome'),
                 ),
               TextFormField(
                 key: const ValueKey('email'),
                 initialValue: _formData.email,
                 onChanged: (email) => _formData.email = email,
+                validator: (_email) {
+                  final email = _email ?? '';
+                  if (!email.contains('@')) {
+                    return 'Email inválido!';
+                  }
+                },
                 decoration: const InputDecoration(labelText: 'E-mail'),
               ),
               TextFormField(
                 key: const ValueKey('password'),
                 initialValue: _formData.password,
+                validator: (_pass) {
+                  final pass = _pass ?? '';
+                  if (pass.length < 6) {
+                    return 'Senha muito curta';
+                  }
+                },
                 onChanged: (pass) => _formData.password = pass,
                 decoration: const InputDecoration(
                   labelText: 'Senha',
