@@ -7,9 +7,17 @@ import 'dart:io';
 import 'package:chat/services/auth/auth_service.dart';
 
 class AuthServiceMock implements AuthService {
+
+  static Map<String, UserModel> _users = {};
+  static UserModel? _currentUser;
+
+
   @override
-  // TODO: implement currentUser
-  UserModel? get currentUser => throw UnimplementedError();
+  UserModel? get currentUser => _currentUser;
+
+  @override
+  // TODO: implement userChanges
+  Stream<UserModel>? get userChanges => throw UnimplementedError();
 
   @override
   Future<void> login(String email, String password) {
@@ -29,7 +37,4 @@ class AuthServiceMock implements AuthService {
     throw UnimplementedError();
   }
 
-  @override
-  // TODO: implement userChanges
-  Stream<UserModel>? get userChanges => throw UnimplementedError();
 }
