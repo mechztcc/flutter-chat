@@ -1,3 +1,5 @@
+import 'package:chat/components/messages.dart';
+import 'package:chat/components/new_message.dart';
 import 'package:chat/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -7,17 +9,16 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Center(
+      appBar: AppBar(
+        title: const Text('Cod3r Chat'),
+      ),
+      body: SafeArea(
         child: Column(
-          children: [
-            const Text('Chat page'),
-            TextButton(
-              onPressed: () {
-                AuthService().logout();
-              },
-              child: const Text('logout'),
-            )
+          children: const [
+            Expanded(
+              child: Messages(),
+            ),
+            NewMessage(),
           ],
         ),
       ),
