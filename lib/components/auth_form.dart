@@ -49,7 +49,9 @@ class _AuthFormState extends State<AuthForm> {
           child: Column(
             children: [
               if (_formData.isSignup)
-                UserImagePicker(onImagePicker: _handlePick),
+                UserImagePicker(
+                  onImagePicker: _handlePick,
+                ),
               TextFormField(
                 key: const ValueKey('name'),
                 initialValue: _formData.name,
@@ -106,9 +108,9 @@ class _AuthFormState extends State<AuthForm> {
                     _formData.toggleAuthMode();
                   });
                 },
-                child: Text(_formData.isLogin
-                    ? 'Criar nova conta'
-                    : 'Já possui conta?'),
+                child: Text(
+                  _formData.isLogin ? 'Criar nova conta' : 'Já possui conta?',
+                ),
               )
             ],
           ),
