@@ -1,5 +1,6 @@
 import 'package:chat/components/auth_form.dart';
 import 'package:chat/models/auth_form_data.dart';
+import 'package:chat/services/auth/auth_service.dart';
 import 'package:chat/services/auth/auth_service_mock.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +21,9 @@ class _AuthPageState extends State<AuthPage> {
       });
 
       if (formData.isLogin) {
-        await AuthServiceMock().login(formData.email, formData.password);
+        await AuthService().login(formData.email, formData.password);
       } else {
-        await AuthServiceMock().signUp(
+        await AuthService().signUp(
           formData.name,
           formData.password,
           formData.email,
