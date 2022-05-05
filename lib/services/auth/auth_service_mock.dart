@@ -36,13 +36,13 @@ class AuthServiceMock implements AuthService {
     String name,
     String password,
     String email,
-    File image,
+    File? image,
   ) async {
     final newUser = UserModel(
       id: Random().nextDouble().toString(),
       name: name,
       email: email,
-      imageUrl: image.path,
+      imageUrl: image?.path ?? '/assets/images/person.png',
     );
 
     _users.putIfAbsent(email, () => newUser);
