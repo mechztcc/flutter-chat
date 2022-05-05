@@ -11,6 +11,33 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cod3r Chat'),
+        actions: [
+          DropdownButton(
+            items: [
+              DropdownMenuItem(
+                value: 'logout',
+                child: Container(
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.transit_enterexit_sharp,
+                      ),
+                      Text('Sair')
+                    ],
+                  ),
+                ),
+              )
+            ],
+            icon: const Icon(
+              Icons.more,
+            ),
+            onChanged: (value) {
+              if (value == 'logout') {
+                AuthService().logout();
+              }
+            },
+          )
+        ],
       ),
       body: SafeArea(
         child: Column(
