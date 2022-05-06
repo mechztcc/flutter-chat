@@ -20,11 +20,22 @@ class MessageBubble extends StatelessWidget {
         Container(
           width: 210,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
           decoration: BoxDecoration(
-              color: belogsToCurrentUser
-                  ? Colors.grey.shade300
-                  : Theme.of(context).colorScheme.secondary,
-              borderRadius: BorderRadius.circular(10)),
+            color: belogsToCurrentUser
+                ? Colors.grey.shade300
+                : Theme.of(context).colorScheme.secondary,
+            borderRadius: BorderRadius.only(
+              topLeft: const Radius.circular(12),
+              topRight: const Radius.circular(12),
+              bottomRight: belogsToCurrentUser
+                  ? const Radius.circular(12)
+                  : const Radius.circular(0),
+              bottomLeft: belogsToCurrentUser
+                  ? const Radius.circular(0)
+                  : const Radius.circular(12),
+            ),
+          ),
           child: Column(
             children: [
               Text(
