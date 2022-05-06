@@ -57,14 +57,23 @@ class MessageBubble extends StatelessWidget {
                 ),
               ),
               child: Column(
+                crossAxisAlignment: belogsToCurrentUser
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
                 children: [
                   Text(
                     message.userName,
+                    textAlign:
+                        belogsToCurrentUser ? TextAlign.start : TextAlign.end,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(message.text),
+                  Text(
+                    message.text,
+                    textAlign:
+                        belogsToCurrentUser ? TextAlign.end : TextAlign.end,
+                  ),
                 ],
               ),
             ),
