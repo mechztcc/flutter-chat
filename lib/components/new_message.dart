@@ -5,12 +5,21 @@ class NewMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: const [
-          Text('new message')
-        ],
-      ),
+    return Row(
+      children: [
+        const Expanded(
+          child: TextField(
+            decoration: InputDecoration(labelText: 'Enviar mensagem'),
+          ),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.send,
+            color: Theme.of(context).primaryColor,
+          ),
+        )
+      ],
     );
   }
 }
