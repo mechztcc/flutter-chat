@@ -10,14 +10,14 @@ class NewMessage extends StatefulWidget {
 }
 
 class _NewMessageState extends State<NewMessage> {
-
   final TextEditingController _controller = TextEditingController();
 
   Future<void> _sendMessage() async {
     final user = AuthService().currentUser;
 
-    if(user != null) {
+    if (user != null) {
       await ChatService().save(_controller.text, user);
+      _controller.clear();
     }
   }
 
