@@ -1,5 +1,6 @@
 import 'package:chat/models/chat_notification.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 
 class PushNotificationService with ChangeNotifier {
   List<ChatNotification> _items = [];
