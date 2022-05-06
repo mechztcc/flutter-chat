@@ -22,13 +22,14 @@ class Messages extends StatelessWidget {
         } else {
           final msgs = snapshot.data!;
           return ListView.builder(
-              reverse: true,
-              itemCount: msgs.length,
-              itemBuilder: (ctx, i) => MessageBubble(
-                    key: ValueKey(msgs[i].id),
-                    message: msgs[i],
-                    belogsToCurrentUser: currentUser?.id == msgs[i].id,
-                  ));
+            reverse: true,
+            itemCount: msgs.length,
+            itemBuilder: (ctx, i) => MessageBubble(
+              key: ValueKey(msgs[i].id),
+              message: msgs[i],
+              belogsToCurrentUser: currentUser?.id == msgs[i].userId,
+            ),
+          );
         }
       },
     );

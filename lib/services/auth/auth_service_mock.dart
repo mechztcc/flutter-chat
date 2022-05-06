@@ -13,8 +13,16 @@ class AuthServiceMock implements AuthService {
     imageUrl: 'assets/images/profile.jpg',
   );
 
+  static final _guestUser = UserModel(
+    id: '2',
+    name: 'Daniel',
+    email: 'daniel@email.com',
+    imageUrl: 'assets/images/profile.jpg',
+  );
+
   static Map<String, UserModel> _users = {
-    _defaultUser.email: _defaultUser
+    _defaultUser.email: _defaultUser,
+    _guestUser.email: _guestUser
   };
   static UserModel? _currentUser;
   static MultiStreamController<UserModel?>? _controller;

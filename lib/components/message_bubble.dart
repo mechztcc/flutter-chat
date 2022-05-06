@@ -13,6 +13,31 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(message.text);
+    return Row(
+      mainAxisAlignment:
+          belogsToCurrentUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+      children: [
+        Container(
+          width: 210,
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          decoration: BoxDecoration(
+              color: belogsToCurrentUser
+                  ? Colors.grey.shade300
+                  : Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(10)),
+          child: Column(
+            children: [
+              Text(
+                message.userName,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(message.text),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
