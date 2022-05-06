@@ -25,6 +25,9 @@ class _NewMessageState extends State<NewMessage> {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        const SizedBox(
+          width: 5,
+        ),
         Expanded(
           child: TextField(
             controller: _controller,
