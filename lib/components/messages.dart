@@ -12,13 +12,14 @@ class Messages extends StatelessWidget {
       builder: (ctx, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
-        } else if (!snapshot.hasData) {
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return const Center(
             child: Text('Nenhuma mensagem encontrada'),
           );
         } else {
           final msgs = snapshot.data!;
           return ListView.builder(
+            reverse: true,
             itemCount: msgs.length,
             itemBuilder: (ctx, i) => Text(msgs[i].text)
           );
