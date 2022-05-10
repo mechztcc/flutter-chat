@@ -65,8 +65,9 @@ class MessageBubble extends StatelessWidget {
                     message.userName,
                     textAlign:
                         belogsToCurrentUser ? TextAlign.start : TextAlign.end,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      color: belogsToCurrentUser ? Colors.black : Colors.white
                     ),
                   ),
                   Text(
