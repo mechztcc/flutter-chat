@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:chat/components/messages.dart';
 import 'package:chat/components/new_message.dart';
+import 'package:chat/models/chat_notification.dart';
 import 'package:chat/pages/notification_page.dart';
 import 'package:chat/services/auth/auth_service.dart';
 import 'package:chat/services/notification/push_notification_service.dart';
@@ -47,8 +50,8 @@ class ChatPage extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (ctx) => const NotificationPage()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (ctx) => const NotificationPage()));
                 },
                 icon: const Icon(
                   Icons.notifications,
@@ -79,6 +82,16 @@ class ChatPage extends StatelessWidget {
             NewMessage(),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Provider.of<PushNotificationService>(context, listen: false).add(
+            ChatNotification(
+                title: 'Notication test',
+                body: Random().nextDouble().toString()),
+          );
+        },
       ),
     );
   }
