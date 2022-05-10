@@ -20,9 +20,8 @@ class AuthFireBaseService implements AuthService {
   UserModel? get currentUser => throw UnimplementedError();
 
   @override
-  Future<void> login(String email, String password) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<void> login(String email, String password) async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
   }
 
   @override
