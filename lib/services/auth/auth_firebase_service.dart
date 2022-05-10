@@ -5,6 +5,16 @@ import 'package:chat/services/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthFireBaseService implements AuthService {
+  static UserModel? _currentUser;
+
+  static final _userStream = Stream<UserModel?>.multi((controller) async {
+    final authChanges = FirebaseAuth.instance.authStateChanges();
+    await for (final user in authChanges) {
+      _currentUser = user == null ? null : _toUserModel(user);
+      controller.add(_currentUser);
+    }
+  });
+
   @override
   // TODO: implement currentUser
   UserModel? get currentUser => throw UnimplementedError();
@@ -34,7 +44,7 @@ class AuthFireBaseService implements AuthService {
       password: password,
     );
 
-    if(credencial.user != null) {
+    if (credencial.user != null) {
       credencial.user?.updateDisplayName(name);
       // credencial.user?.updatePhotoURL(photoURL);
     }
@@ -43,4 +53,13 @@ class AuthFireBaseService implements AuthService {
   @override
   // TODO: implement userChanges
   Stream<UserModel?> get userChanges => throw UnimplementedError();
+
+  static UserModel _toUserModel(User user) {
+    return UserModel(
+      id: user.uid,
+      name: user.displayName ?? user.email!.split('@')[0],
+      email: user.email!,
+      imageUrl: user.photoURL ?? 'assets/images/profile.jpg',
+    );
+  }
 }
