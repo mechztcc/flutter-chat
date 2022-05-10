@@ -17,8 +17,7 @@ class AuthFireBaseService implements AuthService {
   });
 
   @override
-  // TODO: implement currentUser
-  UserModel? get currentUser => throw UnimplementedError();
+  UserModel? get currentUser => _currentUser;
 
   @override
   Future<void> login(String email, String password) async {
@@ -46,8 +45,13 @@ class AuthFireBaseService implements AuthService {
     );
 
     if (credencial.user != null) {
+      final imageName = '${credencial.user!.uid}.jpg';
+      final photoURL= await _updloadUserImage(image, imageName);
+
       credencial.user?.updateDisplayName(name);
-      // credencial.user?.updatePhotoURL(photoURL);
+      credencial.user?.updatePhotoURL(photoURL);
+
+
     }
   }
 
