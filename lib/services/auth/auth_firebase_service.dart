@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:chat/services/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class AuthFireBaseService implements AuthService {
   static UserModel? _currentUser;
@@ -21,7 +22,8 @@ class AuthFireBaseService implements AuthService {
 
   @override
   Future<void> login(String email, String password) async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
   }
 
   @override
@@ -60,5 +62,17 @@ class AuthFireBaseService implements AuthService {
       email: user.email!,
       imageUrl: user.photoURL ?? 'assets/images/profile.jpg',
     );
+  }
+
+  Future<String?> _updloadUserImage(File? image, String imageName) async {
+    if (image != null) {
+      final storage = FirebaseStorage.instance;
+
+      final imageRef = storage.ref().child('user_images').child(imageName);
+      await imageRef.putFile(image).whenComplete(() {});
+      return await imageRef.getDownloadURL();
+    }
+
+    if(image == null) return null;
   }
 }
