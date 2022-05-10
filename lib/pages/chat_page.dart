@@ -1,7 +1,9 @@
 import 'package:chat/components/messages.dart';
 import 'package:chat/components/new_message.dart';
 import 'package:chat/services/auth/auth_service.dart';
+import 'package:chat/services/notification/push_notification_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -54,12 +56,12 @@ class ChatPage extends StatelessWidget {
                 child: CircleAvatar(
                   maxRadius: 10,
                   backgroundColor: Colors.red.shade800,
-                  child: const Text(
-                    '0',
-                    style: TextStyle(fontSize: 12),
+                  child: Text(
+                    '${Provider.of<PushNotificationService>(context).itemsCount}',
+                    style: const TextStyle(fontSize: 12),
                   ),
                 ),
-              )
+              ),
             ],
           )
         ],
