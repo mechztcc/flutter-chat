@@ -14,6 +14,7 @@ class ChatPage extends StatelessWidget {
         actions: [
           DropdownButtonHideUnderline(
             child: DropdownButton(
+              iconEnabledColor: Colors.white,
               items: [
                 DropdownMenuItem(
                   value: 'logout',
@@ -38,6 +39,28 @@ class ChatPage extends StatelessWidget {
                 }
               },
             ),
+          ),
+          Stack(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.notifications,
+                ),
+              ),
+              Positioned(
+                top: 5,
+                right: 5,
+                child: CircleAvatar(
+                  maxRadius: 10,
+                  backgroundColor: Colors.red.shade800,
+                  child: const Text(
+                    '0',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+              )
+            ],
           )
         ],
       ),
